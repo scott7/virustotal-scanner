@@ -72,8 +72,10 @@ clone repo and `from vt import *` to use in another script.
 #check report based on file hash or scanid
   scanner2 = Scan(api)
   scanner2.scan_report(resource,verbose_flag=1)
-
 </pre>
+
+Note VirusTotal class uses postfile.py snippet from http://code.activestate.com/recipes/146306/
+
 
 improvements planned
 =====
