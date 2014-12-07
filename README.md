@@ -26,11 +26,11 @@ usage - vt_scanner.py
 
 Scan a file and display results (if file exists in VT database it will not be resubmitted):
 
-<pre>vt_scanner.py -a <API KEY> -f /path/to/file</pre> 
+<pre>vt_scanner.py -a API KEY -f /path/to/file</pre> 
 
 Query report and display results (provide file hash or scan id):
 
-<pre>vt_scanner.py -a <API KEY> -r d74b1df3ab16b36d48850f5d57b346b0</pre> 
+<pre>vt_scanner.py -a API KEY -r d74b1df3ab16b36d48850f5d57b346b0</pre> 
 
 SAMPLE OUTPUT:
 
