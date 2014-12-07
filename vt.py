@@ -185,7 +185,7 @@ class VirusTotal(object):
   #  Returns 1 if successful                                            #   
   #                                                                     #
   #  Note: this will send a web request to virustotal everytime         # 
-  #    function is called                                               #
+  #    function is called and can take several minutes to complete      #
   #######################################################################
   def query_status(self):
     found = 0
@@ -195,7 +195,7 @@ class VirusTotal(object):
       count += 1
       time.sleep(60)
       json_out = self._submit_resource(method)
-      if(count > 5):
+      if(count > 6):
         return STAT_FAILED
       if((json_out["response_code"] == 1 and 
         json_out["verbose_msg"] != "Scan request successfully queued, come back later for the report")):
@@ -221,6 +221,15 @@ class VirusTotal(object):
     else:
       return report_json
   
+  #######################################################################
+  #  gather_report_details                                              #
+  #  internal method to get positive vt result details                  #
+  #   such as vendor names,malware names, and dates                     #
+  #                                                                     #
+  #  Returns dictonary of values if successful                          #   
+  #  Returns 1 if no vendors flagged the resource                       #
+  #                                                                     # 
+  #######################################################################
   @staticmethod 
   def _gather_report_details(json):
     if(json['response_code'] == 1):
@@ -260,7 +269,12 @@ class VirusTotal(object):
     
     else:
       return 0
-          
+  
+  #######################################################################
+  #  make_awesome_report                                                #
+  #  Print full scan report (uses _gather_report_details)               #
+  #                                                                     #
+  #######################################################################
   def make_awesome_report(self):
     raw_json = self.get_report()
     
@@ -291,6 +305,7 @@ class VirusTotal(object):
     elif(raw_json['response_code'] == 0):
       print " Resource not found in Virus Total database "
       print " resource: " + raw_json['resource']
+      
       
 ########################
 #   Scan Class         #
@@ -349,7 +364,7 @@ class Scan(object):
       
       vt.make_awesome_report()
     else:
-      if(verbose_flag): print("submitting file")
+      if(verbose_flag): print("submitting file - this could take several minutes")
       return_dict = vt.submit_file()
       if(return_dict['code']== 1):
         scan_id = return_dict['scan_id']

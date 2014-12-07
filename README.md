@@ -8,7 +8,7 @@ More information on the VirusTotal API can be found here: https://www.virustotal
 `vt_scanner.py` is a CLI script using the `vt.py` module that can be called directly.
 `vt.py` can be used as a library in another python script.
 
-pre-requisites
+prerequisites
 =====
 
 VirusTotal API key (create an account/sign on to virustotal to get a free API key)
