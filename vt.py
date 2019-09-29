@@ -1,6 +1,10 @@
+try:
+    import urllib.request as urllib2
+except ImportError:
+    import urllib2
+
 import json
 import urllib
-import urllib2
 import hashlib
 import postfile
 import time
@@ -279,7 +283,7 @@ class VirusTotal(object):
     raw_json = self.get_report()
     
     if(raw_json == INVALID_RESULTS_ERROR): #this will happen if invalid hash is submitted
-      print "Resouce not found - invalid hash probably"
+      print("Resouce not found - invalid hash probably")
     elif(raw_json['response_code'] == 1):
       #display status information
       print("Scan Date " + str(raw_json['scan_date']))
@@ -291,20 +295,20 @@ class VirusTotal(object):
       #print detailed report
       output = self._gather_report_details(raw_json)
       if(output == 1):
-        print "No vendors flagged this resource as malicious"
+        print("No vendors flagged this resource as malicious")
       elif(output != 0):
         vendor = output['detect_list']
         for val in vendor:
-          print "\nVendor: %s \n Result: %s        Version: %s    Update: %s \n" % (val, str(output[val]['result']), str(output[val]['version']),str(output[val]['update']))
+          print("\nVendor: %s \n Result: %s        Version: %s    Update: %s \n" % (val, str(output[val]['result']), str(output[val]['version']),str(output[val]['update'])))
         if(output['failed']):    
-          print "The following vendors did not flag this as malicious: \n %s" % (str(" -- ".join(output['failedlist_key']['failed_list'])))
+          print("The following vendors did not flag this as malicious: \n %s" % (str(" -- ".join(output['failedlist_key']['failed_list']))))
       else:
-        print "ERROR: Not found." 
+        print("ERROR: Not found.") 
       
     #Resource not found in DB 
     elif(raw_json['response_code'] == 0):
-      print " Resource not found in Virus Total database "
-      print " resource: " + raw_json['resource']
+      print(" Resource not found in Virus Total database ")
+      print(" resource: " + raw_json['resource'])
       
       
 ########################
@@ -411,6 +415,6 @@ def example():
   
   
 def main():
-  print "This script contains the class implementations to interact with VirusTotal - do not call directly"
+  print("This script contains the class implementations to interact with VirusTotal - do not call directly")
 if __name__ == "__main__":
   main()

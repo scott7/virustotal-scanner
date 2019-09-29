@@ -1,5 +1,9 @@
 #snippet from http://code.activestate.com/recipes/146306/
-import httplib, mimetypes
+try:
+    from httplib import HTTP
+except ImportError:
+    from http import http as httplib
+import mimetypes
 
 def post_multipart(host, selector, fields, files):
     """

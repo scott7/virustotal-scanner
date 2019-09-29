@@ -17,7 +17,7 @@ def init_scan():
   arg = get_options()
   
   if not arg.api_key:
-    print "Please provide api key with '-a' argument"
+    print("Please provide api key with '-a' argument")
   api = arg.api_key
   
   if arg.file:
@@ -27,7 +27,7 @@ def init_scan():
     scanner = Scan(api)
     scanner.scan_report(arg.resource,verbose_flag=1)
   else:
-    print "No option specified."
+    print("No option specified.")
   
   
 if __name__ == "__main__":
